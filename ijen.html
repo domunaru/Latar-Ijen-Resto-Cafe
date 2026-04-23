@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latar Ijen Resto & Cafe - Malang</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c1810;
+            --secondary: #8b6914;
+            --accent: #d4a853;
+            --light: #f5f0e8;
+            --dark: #1a0f0a;
+            --text: #333;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .brand {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 15, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(212, 168, 83, 0.2);
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.8rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand i {
+            font-size: 1.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-address {
+            color: var(--accent);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--accent);
+            transition: all 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(26,15,10,0.8), rgba(44,24,16,0.9)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(212,168,83,0.1)" stroke-width="0.5"/></svg>');
+            background-size: 100px;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 3px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--accent);
+            margin: 0.5rem;
+        }
+
+        .cta-btn:hover {
+            background: transparent;
+            color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212,168,83,0.3);
+        }
+
+        .cta-btn.outline {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .cta-btn.outline:hover {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .section-header p {
+            color: #666;
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about {
+            background: #fff;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 10px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .feature-item i {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        /* Menu Section */
+        .menu {
+            background: linear-gradient(to bottom, var(--light), #fff);
+        }
+
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 2rem;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--primary);
+            color: var(--accent);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .menu-card .badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .menu-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .menu-card:hover .menu-img {
+            transform: scale(1.1);
+        }
+
+        .menu-info {
+            padding: 1.5rem;
+        }
+
+        .menu-info h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-info p {
+            color: #777;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .menu-price {
+            display: block;
+            margin-top: 1rem;
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: var(--dark);
+            color: #fff;
+        }
+
+        .gallery .section-header h2 {
+            color: #fff;
+        }
+
+        .gallery .section-header p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(26,15,10,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        /* Location Section */
+        .location {
+            background: #fff;
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .location-info {
+            padding: 2rem;
+        }
+
+        .location-info h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 10px;
+        }
+
+        .info-item i {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-top: 0.2rem;
+        }
+
+        .info-item div h4 {
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .info-item div p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: #fff;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-brand {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: block;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer-about p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--dark);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+                gap: 1.5rem;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-address {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid, .location-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--dark);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-content h2 {
+            color: var(--accent);
+            font-size: 2rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <h2>Latar Ijen</h2>
+            <p style="color: rgba(255,255,255,0.6); margin-top: 1rem;">Loading...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand">
+                <i class="fas fa-utensils"></i>
+                LATAR IJEN
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#gallery">Galeri</a></li>
+                <li><a href="#location">Lokasi</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+
+            <div class="nav-address">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Jl. Besar Ijen No.79, Malang</span>
+            </div>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Latar Ijen</h1>
+            <p class="subtitle">Resto & Cafe</p>
+            <p>Nikmati pengalaman kuliner terbaik dengan sentuhan lokal dan internasional di jantung Kota Malang. Suasana elegan dengan konsep kolonial yang memukau.</p>
+            <div>
+                <a href="#menu" class="cta-btn">Lihat Menu</a>
+                <a href="https://wa.me/6281333828000" class="cta-btn outline" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Reservasi
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Tentang Kami</h2>
+                <p>Menggabungkan cita rasa tradisional Indonesia dengan sentuhan modern</p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-img fade-in">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800" alt="Interior Latar Ijen">
+                </div>
+                <div class="about-content fade-in">
+                    <h3>Handcrafted Culinary Experience</h3>
+                    <p>Latar Ijen Resto & Cafe menghadirkan konsep kuliner segar dari bahan-bahan lokal berkualitas. Berlokasi di gedung bergaya kolonial khas Jalan Ijen, kami menawarkan pengalaman bersantap yang elegan dengan porsi yang royal.</p>
+                    <p>Dengan interior dominan warna putih dan coklat, tempat ini menciptakan suasana intim yang ideal untuk makan malam romantis maupun gathering keluarga. Tersedia area indoor, outdoor, dan rooftop dengan taman sentral yang menambah kesan alami.</p>
+                    
+                    <div class="features">
+                        <div class="feature-item">
+                            <i class="fas fa-leaf"></i>
+                            <div>
+                                <h4>Bahan Lokal</h4>
+                                <p>100% fresh ingredients</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-award"></i>
+                            <div>
+                                <h4>Chef Profesional</h4>
+                                <p>MasterChef Season 08</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-wifi"></i>
+                            <div>
+                                <h4>Free WiFi</h4>
+                                <p>Nikmati koneksi cepat</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-mosque"></i>
+                            <div>
+                                <h4>Musholla</h4>
+                                <p>Tersedia fasilitas sholat</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Menu Kami</h2>
+                <p>Pilihan hidangan istimewa dari dapur Latar Ijen</p>
+            </div>
+
+            <div class="menu-tabs fade-in">
+                <button class="tab-btn active" onclick="filterMenu('all')">Semua</button>
+                <button class="tab-btn" onclick="filterMenu('popular')">Populer</button>
+                <button class="tab-btn" onclick="filterMenu('makanan')">Makanan</button>
+                <button class="tab-btn" onclick="filterMenu('minuman')">Minuman</button>
+            </div>
+
+            <div class="menu-grid" id="menuGrid">
+                <!-- Menu dari screenshot -->
+                <div class="menu-card fade-in" data-category="popular makanan">
+                    <span class="badge">Populer</span>
+                    <div style="overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600" alt="Nasi Iga Bakar Kuah Sop" class="menu-img">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Nasi Iga Bakar Kuah Sop</h3>
+                        <p>Iga bakar empuk dengan kuah sop spesial dan nasi hangat</p>
+                        <span class="menu-price">Rp 45.000</span>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in" data-category="popular makanan">
+                    <span class="badge">Populer</span>
+                    <div style="overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600" alt="Nasi Goreng Iga Penyet" class="menu-img">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Nasi Goreng Iga Penyet</h3>
+                        <p>Nasi goreng spesial dengan iga penyet dan sambal</p>
+                        <span class="menu-price">Rp 42.000</span>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in" data-category="popular makanan">
+                    <span class="badge">Populer</span>
+                    <div style="overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600" alt="Cowboy Burger" class="menu-img">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Cowboy Burger</h3>
+                        <p>Burger juicy dengan telur mata sapi, daging sapi premium, dan kentang goreng</p>
+                        <span class="menu-price">Rp 55.000</span>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in" data-category="makanan">
+                    <div style="overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600" alt="Tahu Goreng Banyuwangi" class="menu-img">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Tahu Goreng Banyuwangi</h3>
+                        <p>Tahu goreng khas Banyuwangi dengan bumbu spesial</p>
+                        <span class="menu-price">Rp 25.000</span>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in" data-category="makanan">
+                    <div style="overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600" alt="Sop Buntut Istimewa" class="menu-img">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Sop Buntut Istimewa</h3>
+                        <p>Sop buntut dengan kuah bening segar dan sayuran</p>
+                        <span class="menu-price">Rp 48.000</span>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in" data-category="makanan">
+                    <div style="overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=600" alt="Kue Klepon" class="menu-img">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Kue Klepon</h3>
+                        <p>Klepon tradisional dengan isian gula merah dan taburan kelapa</p>
+                        <span class="menu-price">Rp 18.000</span>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in" data-category="minuman">
+                    <div style="overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600" alt="Alpukat Mocca" class="menu-img">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Alpukat Mocca</h3>
+                        <p>Jus alpukat dengan sentuhan mocca yang creamy</p>
+                        <span class="menu-price">Rp 22.000</span>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in" data-category="minuman">
+                    <div style="overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600" alt="Avocado Kocok" class="menu-img">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Avocado Kocok</h3>
+                        <p>Avocado shake khas dengan topping coklat dan krim</p>
+                        <span class="menu-price">Rp 24.000</span>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in" data-category="makanan">
+                    <div style="overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1596560548464-f010549b84d7?w=600" alt="Nasi Putih" class="menu-img">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Nasi Putih</h3>
+                        <p>Nasi putih pulen (Free - tersedia selama persediaan)</p>
+                        <span class="menu-price">Rp 0 (Gratis)</span>
+                    </div>
+                </div>
+
+                <!-- Menu tambahan -->
+                <div class="menu-card fade-in" data-category="makanan">
+                    <div style="overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=600" alt="Sate KSATRIA" class="menu-img">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Sate KSATRIA</h3>
+                        <p>Sate spesial dengan bumbu kacang yang seimbang</p>
+                        <span class="menu-price">Rp 38.000</span>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in" data-category="makanan">
+                    <div style="overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=600" alt="Ikan Bakar" class="menu-img">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Ikan Bakar</h3>
+                        <p>Ikan bakar segar dengan sambal matah</p>
+                        <span class="menu-price">Rp 52.000</span>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in" data-category="makanan">
+                    <div style="overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600" alt="Bebek Bumbu Hitam" class="menu-img">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Bebek Bumbu Hitam</h3>
+                        <p>Bebek dengan bumbu hitam pedas dan gurih</p>
+                        <span class="menu-price">Rp 48.000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Galeri</h2>
+                <p>Momen-momen indah di Latar Ijen</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600" alt="Interior">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600" alt="Dining Area">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600" alt="Food">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1550966871-3ed3c47e2ce2?w=600" alt="Rooftop">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=600" alt="Outdoor">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600" alt="Kitchen">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location" id="location">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Lokasi Kami</h2>
+                <p>Kunjungi kami di Jalan Ijen, Malang</p>
+            </div>
+
+            <div class="location-grid">
+                <div class="location-info fade-in">
+                    <h3>Informasi Lokasi</h3>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Alamat</h4>
+                            <p>Jl. Besar Ijen No.79, Oro-oro Dowo, Kec. Klojen, Kota Malang, Jawa Timur 65119</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Jam Operasional</h4>
+                            <p>Senin - Minggu: 10.00 - 22.00 WIB<br>
+                            Sarapan tersedia setiap hari</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Telepon / WhatsApp</h4>
+                            <p>0813-3382-8000<br>0813-3325-9000</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@latarijen.com</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-car"></i>
+                        <div>
+                            <h4>Parkir</h4>
+                            <p>Area parkir luas tersedia untuk mobil dan motor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-container fade-in">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.5!2d112.62!3d-7.98!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6281c1c6e2e5d%3A0x3c1e5c4e5e5e5e5e!2sJl.%20Besar%20Ijen%20No.79%2C%20Oro-oro%20Dowo%2C%20Kec.%20Klojen%2C%20Kota%20Malang%2C%20Jawa%20Timur%2065119!5e0!3m2!1sid!2sid!4v1600000000000!5m2!1sid!2sid"
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <span class="footer-brand">Latar Ijen</span>
+                <p>Resto & Cafe yang menghadirkan pengalaman kuliner terbaik dengan konsep kolonial modern di jantung Kota Malang. Nikmati hidangan lokal dan internasional dengan porsi royal.</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/latar.ijen" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://facebook.com/latarijen" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://tiktok.com/@latar.ijen" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://wa.me/6281333828000" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h4>Menu Cepat</h4>
+                <ul>
+                    <li><a href="#home"><i class="fas fa-chevron-right"></i> Beranda</a></li>
+                    <li><a href="#about"><i class="fas fa-chevron-right"></i> Tentang Kami</a></li>
+                    <li><a href="#menu"><i class="fas fa-chevron-right"></i> Menu</a></li>
+                    <li><a href="#gallery"><i class="fas fa-chevron-right"></i> Galeri</a></li>
+                    <li><a href="#location"><i class="fas fa-chevron-right"></i> Lokasi</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Layanan</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Reservasi</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Private Event</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Catering</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Delivery</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Kebijakan Privasi</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Syarat & Ketentuan</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p> Latar Ijen Resto & Cafe. All rights reserved. | Dibuat dengan <i class="fas fa-heart" style="color: var(--accent);"></i> di Malang</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Menu filter
+        function filterMenu(category) {
+            const cards = document.querySelectorAll('.menu-card');
+            const buttons = document.querySelectorAll('.tab-btn');
+            
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(category) || 
+                    (category === 'all' && btn.textContent === 'Semua')) {
+                    btn.classList.add('active');
+                }
+            });
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category.includes(category)) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Gallery lightbox effect (simple)
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                // Create modal
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed;
+                    inset: 0;
+                    background: rgba(0,0,0,0.9);
+                    z-index: 10000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: zoom-out;
+                    animation: fadeIn 0.3s;
+                `;
+                
+                const modalImg = document.createElement('img');
+                modalImg.src = img.src;
+                modalImg.style.cssText = `
+                    max-width: 90%;
+                    max-height: 90%;
+                    border-radius: 10px;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+                `;
+                
+                modal.appendChild(modalImg);
+                document.body.appendChild(modal);
+                
+                modal.addEventListener('click', () => {
+                    modal.remove();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
